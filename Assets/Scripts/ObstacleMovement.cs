@@ -2,29 +2,24 @@ using UnityEngine;
 
 public class ObstacleMovement : MonoBehaviour
 {
-    private float speed;
+    public float speed = 5f;
     GameController m_gc;
-    int tmp;
+    bool isIncre;
 
     // Start is called before the first frame update
     private void Start()
     {
-        speed = 5f;
-        tmp = 1;
+        isIncre = false;
         m_gc = FindObjectOfType<GameController>();
     }
 
     // Update is called once per frame
+
     void Update()
     {
-        
+        changeSpeed();
         transform.position = transform.position + Vector3.left * speed * Time.deltaTime;
-        if(m_gc.getScore()/10 >= tmp)
-        {
-            speed += 0.1f;
-            tmp += 1;
-        }
-
+        Debug.Log(speed);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,10 +27,17 @@ public class ObstacleMovement : MonoBehaviour
         {
             m_gc.incrementScore();
 
-            Debug.Log("cham vao limit");
+         //   Debug.Log("cham vao limit");
             Destroy(gameObject);
         }
 
     }
-
+    public void changeSpeed()
+    {
+        if (m_gc.getScore() % 5 == 0 && m_gc.getScore() > 0 && !isIncre)
+        {
+            speed += 0.05f;
+            isIncre = true;
+        }
+    }
 }

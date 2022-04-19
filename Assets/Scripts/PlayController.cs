@@ -31,7 +31,7 @@ public class PlayController : MonoBehaviour
             }
             rb.AddForce(Vector2.up  * jumpForce);
             isCollisonWithGround = false;   
-            Debug.Log("nhan space");
+        //    Debug.Log("nhan space");
         }    
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -52,7 +52,7 @@ public class PlayController : MonoBehaviour
                 Time.timeScale = 0;
             }
             m_gc.setGameOverstate(true);
-            Debug.Log("Game over");
+           // Debug.Log("Game over");
         }
     }
     public void endSound()
